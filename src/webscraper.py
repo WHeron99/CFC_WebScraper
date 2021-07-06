@@ -2,7 +2,7 @@ import utilities
 
 # Set options (i.e. target webpage):
 _TARGET_URL = 'https://www.cfcunderwriting.com'     # Target URL to scrape
-_SAVE_DIR = '..'                          # Target location for output files
+_SAVE_DIR = '..'                                    # Target location for output files
 
 # 1/2: Get the external resources for the target page and save the results a JSON file
 external_resources = utilities.get_external_resources(_TARGET_URL)

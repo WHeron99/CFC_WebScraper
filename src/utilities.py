@@ -64,7 +64,7 @@ def get_external_resources(url):
     resources.extend(get_attributes_for_tag(soup, 'link', 'href'))
     resources.extend(get_attributes_for_tag(soup, 'script', 'src'))
 
-    # Filter external_resources to remove local links and return
+    # Filter external_resources to remove local links and return filtered list
     external_resources = [url for url in resources if location_is_external(url)]
     return external_resources
 
@@ -140,13 +140,11 @@ def get_page_word_frequency(link):
 
     # Get all of the page's text and clean it up
     page_text = visible_text_from_page(page)
-    page_text = page_text.encode('ascii', 'ignore').decode()
-    page_text = page_text.translate(str.maketrans('', '', string.punctuation))
-    #! page_text = page_text.encode('ascii', 'ignore').decode()        # Remove unicode characters
+    page_text = page_text.encode('ascii', 'ignore').decode()                        # Removes unicode characters by convert to ASCII then back
+    page_text = page_text.translate(str.maketrans('', '', string.punctuation))      # Remove punctuation from text
 
     # Split the text on spaces
     page_words = page_text.split(' ')
-    for word in page_words: word.strip()
 
     # Create a dictionary to track occurances of each word - using each word as a key
     word_occurances = {}
@@ -154,9 +152,10 @@ def get_page_word_frequency(link):
         # Prevent empty string
         if (word == ''): continue
 
+        # Increment existing words in dictionary *or* create new keys for new words
         if word.lower() in word_occurances:
-            word_occurances[word.lower()] += 1
+            word_occurances[word.lower()] += 1      # Increment existing
         else:
-            word_occurances[word.lower()] = 1
+            word_occurances[word.lower()] = 1       # Initialise new
 
     return word_occurances
