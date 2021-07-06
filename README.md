@@ -8,4 +8,4 @@ To run the code to demonstrate the answers to the four challenge points outlined
 
 `$ python webscraper.py`
 
-This will run the program, and create the two JSON output files.
+This will run the program, and create the two JSON output files. By default, these will be written to the top level directory of the project.
